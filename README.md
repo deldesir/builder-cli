@@ -4,7 +4,7 @@ A command-line tool for syncing and managing [frappe/builder](https://github.com
 
 ---
 
-## 📚 Official Documentation
+## 📚 Documentation
 
 We have established a comprehensive, multi-page professional documentation site covering all facets of the installation, command reference, internal sync architecture, subpath proxied setups, and active troubleshooting.
 
