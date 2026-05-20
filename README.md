@@ -1,6 +1,9 @@
-# builder-cli
+# builder
 
 A command-line tool for syncing and managing [frappe/builder](https://github.com/frappe/builder) pages between your local workspace and a Frappe server. This tool enables **real-time, bi-directional synchronization**.
+
+> [!NOTE]
+> **Credits & Attribution**: This project is a standalone, customized distribution of the original [stravo1/builder-cli](https://github.com/stravo1/builder-cli) repository. It has been detached to serve as a specialized tool optimized for custom workflows, featuring complete programmatic `push` queue synchronization, robust file error handling, and extensive multi-page documentation.
 
 ---
 
@@ -22,7 +25,7 @@ We have established a comprehensive, multi-page professional documentation site 
 ## Installation
 
 ```bash
-git clone https://github.com/stravo1/builder-cli
+git clone https://github.com/deldesir/builder.git
 cd builder
 npm install
 npm run build
