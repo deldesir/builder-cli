@@ -2,6 +2,7 @@ node_modules
 dist
 config.json
 *debug.log
+*.log
 .DS_Store
 .env
 workspace/
