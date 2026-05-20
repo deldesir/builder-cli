@@ -2,6 +2,22 @@
 
 A command-line tool for syncing and managing [frappe/builder](https://github.com/frappe/builder) pages between your local workspace and a Frappe server. This tool enables **real-time, bi-directional synchronization**.
 
+---
+
+## 📚 Official Documentation
+
+We have established a comprehensive, multi-page professional documentation site covering all facets of the installation, command reference, internal sync architecture, subpath proxied setups, and active troubleshooting.
+
+### 🗺️ Documentation Navigation Map
+
+*   **[🏠 Documentation Home](docs/index.md)** — Landing page, key features, and high-level architectural diagram.
+*   **[🚀 Getting Started Guide](docs/getting-started.md)** — Local setup, TypeScript builds, credentials, and baseline pulling.
+*   **[💻 Detailed Command Reference](docs/commands-reference.md)** — In-depth breakdown of `init`, `pull`, `push`, and `watch` mechanics.
+*   **[🏗️ Architecture & Sync Algorithms](docs/architecture-sync.md)** — Local folder layouts, `.last_modified` comparison, and the **Unified Component Serialization Fallback** bug fix.
+*   **[🔌 Frappe & Nginx Subpaths](docs/frappe-integration.md)** — Mappings for `/erp` subpaths, background drafts vs. production databases, and server cache flushing.
+*   **[🛠️ Step-by-Step Troubleshooting](docs/troubleshooting.md)** — Overcoming HTTP 417 `DocumentLockedError`, restoring wiped components, and invalidating state caches.
+
+---
 
 ## Installation
 

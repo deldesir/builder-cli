@@ -4,3 +4,4 @@ config.json
 *debug.log
 .DS_Store
 .env
+workspace/

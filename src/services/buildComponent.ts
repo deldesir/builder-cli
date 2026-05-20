@@ -13,14 +13,21 @@ const buildComponent = async (componentDir: string): Promise<Component> => {
     const componentData = componentJsonContent ? JSON.parse(componentJsonContent) : {};
 
 
-    // Read blocks recursively
+    // Read blocks recursively if blocks directory exists, otherwise fallback to componentData.block
     const blocksDir = `${componentDir}/blocks/`;
-    const componentRootDir = readDir(blocksDir)[0]; // Component can have only one root block
     let rootBlock: Block | null = null;
+    if (fileExists(blocksDir)) {
+        const dirContents = readDir(blocksDir);
+        if (dirContents && dirContents.length > 0) {
+            const componentRootDir = dirContents[0]; // Component can have only one root block
+            if (fileExists(`${blocksDir}/${componentRootDir}`)) {
+                rootBlock = readBlocksRecursively(`${blocksDir}/${componentRootDir}`);
+            }
+        }
+    }
 
-    // Read all blocks starting from root
-    if (fileExists(`${blocksDir}/${componentRootDir}`)) {
-        rootBlock = readBlocksRecursively(`${blocksDir}/${componentRootDir}`);
+    if (!rootBlock && componentData.block) {
+        rootBlock = typeof componentData.block === "string" ? JSON.parse(componentData.block) : componentData.block;
     }
 
     return {

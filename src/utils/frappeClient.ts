@@ -111,9 +111,9 @@ class FrappeClient {
                 body: JSON.stringify(body),
             });
             if (!response.ok) {
-                logger.debug(JSON.stringify(response));
+                const errBody = await response.text();
                 logger.error(
-                    `${response.status} ${response.statusText || "Unknown error occurred while updating page"}`,
+                    `${response.status} ${response.statusText || "Unknown error occurred while updating page"}: ${errBody}`
                 );
                 return null;
             }
@@ -207,11 +207,9 @@ class FrappeClient {
             });
             
             if (!response.ok) {
-                logger.debug(JSON.stringify(response));
+                const errBody = await response.text();
                 logger.error(
-                    `${response.status} ${response.statusText ||
-                    "Unknown error occurred while updating component"
-                    }`,
+                    `${response.status} ${response.statusText || "Unknown error occurred while updating component"}: ${errBody}`
                 );
                 return null;
             }
