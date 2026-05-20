@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Builder CLI — Premium Documentation</title>
+    
+    <!-- PrismJS Theme (Dark Theme default for code blocks) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    
+    <!-- Custom Tailored Theme Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="dark-theme">
+
+<div class="app-wrapper">
+    <!-- ==========================================
+         🏠 SIDEBAR NAVIGATION
+         ========================================== -->
+    <aside class="sidebar" id="app-sidebar">
+        <div class="sidebar-header">
+            <div class="logo-icon">B</div>
+            <div class="logo-text">
+                <h1>Builder CLI</h1>
+                <span>Developer Docs</span>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div>
+                <div class="nav-group-title">Introduction</div>
+                <ul class="nav-links">
+                    <li class="nav-item" data-page="index">
+                        <a href="#index">
+                            <i data-lucide="home"></i>
+                            <span>Overview & Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="getting-started">
+                        <a href="#getting-started">
+                            <i data-lucide="rocket"></i>
+                            <span>Getting Started</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div>
+                <div class="nav-group-title">Guides</div>
+                <ul class="nav-links">
+                    <li class="nav-item" data-page="commands-reference">
+                        <a href="#commands-reference">
+                            <i data-lucide="terminal"></i>
+                            <span>Command Reference</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="architecture-sync">
+                        <a href="#architecture-sync">
+                            <i data-lucide="cpu"></i>
+                            <span>Architecture & Sync</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-page="frappe-integration">
+                        <a href="#frappe-integration">
+                            <i data-lucide="layers"></i>
+                            <span>Frappe & Subpaths</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="nav-group-title">Help & Support</div>
+                <ul class="nav-links">
+                    <li class="nav-item" data-page="troubleshooting">
+                        <a href="#troubleshooting">
+                            <i data-lucide="alert-triangle"></i>
+                            <span>Troubleshooting</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- ==========================================
+         💻 MAIN DOCUMENTATION CONTAINER
+         ========================================== -->
+    <main class="main-content">
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="sidebar-toggle" aria-label="Toggle Sidebar">
+                    <i data-lucide="menu"></i>
+                </button>
+                
+                <!-- Advanced Search -->
+                <div class="search-wrapper">
+                    <input type="text" class="search-input" id="search-box" placeholder="Search documentation... (Press '/' to focus)" autocomplete="off">
+                    <i data-lucide="search" class="search-icon"></i>
+                    
+                    <div class="search-results-box" id="search-results-container">
+                        <ul class="search-results-list" id="search-results-list"></ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <!-- Theme Toggle -->
+                <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Theme">
+                    <!-- Sun Icon for switching to Light Mode -->
+                    <svg class="sun-icon" style="display: none;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <!-- Moon Icon for switching to Dark Mode -->
+                    <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                
+                <!-- Edit on GitHub -->
+                <a href="https://github.com/deldesir/builder-cli" target="_blank" class="github-link-btn">
+                    <i data-lucide="github"></i>
+                    <span>Fork Repository</span>
+                </a>
+            </div>
+        </header>
+        
+        <!-- ARTICLE WORKSPACE -->
+        <div class="content-wrapper">
+            <article>
+                <div id="rendered-content">
+                    <p style="text-align: center; color: var(--text-muted); margin-top: 100px;">Loading documentation...</p>
+                </div>
+                
+                <!-- Nav footer buttons -->
+                <footer class="doc-footer">
+                    <a href="#" class="footer-nav-link prev" id="footer-prev-btn" style="visibility: hidden;">
+                        <span class="footer-nav-label">Previous</span>
+                        <span class="footer-nav-title">
+                            <i data-lucide="chevron-left"></i>
+                            <span id="footer-prev-title">Introduction</span>
+                        </span>
+                    </a>
+                    
+                    <a href="#" class="footer-nav-link next" id="footer-next-btn" style="visibility: hidden;">
+                        <span class="footer-nav-label">Next</span>
+                        <span class="footer-nav-title" style="justify-content: flex-end;">
+                            <span id="footer-next-title">Getting Started</span>
+                            <i data-lucide="chevron-right"></i>
+                        </span>
+                    </a>
+                </footer>
+            </article>
+        </div>
+    </main>
+</div>
+
+<!-- ==========================================
+     ⚙️ JAVASCRIPT FRAMEWORK
+     ========================================== -->
+     
+<!-- Marked.js Parser -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<!-- PrismJS Core and Syntax Highlighter -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+<script>
+    // --- 🚨 DOCUMENTATION METADATA INDEX FOR ROUTER & SECTIONS ---
+    const pagesList = [
+        { id: "index", title: "Overview & Introduction", file: "index.md" },
+        { id: "getting-started", title: "Getting Started", file: "getting-started.md" },
+        { id: "commands-reference", title: "Command Reference", file: "commands-reference.md" },
+        { id: "architecture-sync", title: "Architecture & Sync", file: "architecture-sync.md" },
+        { id: "frappe-integration", title: "Frappe & Subpaths", file: "frappe-integration.md" },
+        { id: "troubleshooting", title: "Troubleshooting Guide", file: "troubleshooting.md" }
+    ];
+
+    let fullTextIndex = []; // Background full-text search index cache
+
+    // SVG Icons Map for Alerts
+    const alertIcons = {
+        NOTE: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>',
+        TIP: '<svg viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.808 13.066A6 6 0 1 0 12 6c-2.316 0-4.32 1.31-5.32 3.224a5.972 5.972 0 0 0-.256 5.842l1.02 2.043z"></path></svg>',
+        IMPORTANT: '<svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"></path><line x1="12" y1="9" x2="12" y2="15"></line><line x1="12" y1="19" x2="12.01" y2="19"></line></svg>',
+        WARNING: '<svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>',
+        CAUTION: '<svg viewBox="0 0 24 24"><octagon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></octagon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>'
+    };
+
+    // ==========================================
+    // 🎨 ROUTER & DYNAMIC MARKDOWN FETCHING
+    // ==========================================
+
+    async function loadPage(pageId) {
+        const renderedContainer = document.getElementById("rendered-content");
+        
+        // Find matching metadata
+        const pageInfo = pagesList.find(p => p.id === pageId) || pagesList[0];
+        
+        // Highlight active sidebar items
+        document.querySelectorAll(".nav-item").forEach(item => {
+            if (item.getAttribute("data-page") === pageInfo.id) {
+                item.classList.add("active");
+            } else {
+                item.classList.remove("active");
+            }
+        });
+
+        // Set document title
+        document.title = `${pageInfo.title} — Builder CLI`;
+
+        try {
+            // Fetch raw markdown file
+            const response = await fetch(pageInfo.file);
+            if (!response.ok) throw new Error(`Could not fetch ${pageInfo.file}`);
+            let markdown = await response.text();
+
+            // Intercept relative markdown header links if present, remove them
+            markdown = stripLocalMarkdownNavigation(markdown);
+
+            // Parse Markdown to HTML
+            let html = marked.parse(markdown);
+
+            // Inject Custom Alert Containers
+            html = parseGitHubAlerts(html);
+
+            // Inject compiled HTML
+            renderedContainer.innerHTML = html;
+
+            // Format Code Blocks (PrismJS terminal style & Copy Buttons)
+            formatCodeBlocks();
+
+            // Trigger PrismJS highlighting on all new elements
+            Prism.highlightAllUnder(renderedContainer);
+
+            // Update footer links
+            updateFooterNav(pageInfo.id);
+
+            // Close responsive sidebar if open (on mobile)
+            document.getElementById("app-sidebar").classList.remove("open");
+            
+            // Scroll back to top
+            window.scrollTo({ top: 0, behavior: "smooth" });
+
+        } catch (error) {
+            console.error(error);
+            renderedContainer.innerHTML = `
+                <div class="custom-alert alert-caution" style="margin-top: 50px;">
+                    <div class="alert-icon-box">${alertIcons.CAUTION}</div>
+                    <div class="alert-content-box">
+                        <strong>Error Loading Page</strong>
+                        <p>We could not retrieve the documentation page: <code>${pageInfo.file}</code>. Please make sure you are viewing this page through a web server (such as Python's simple HTTP server or VS Code's Live Server).</p>
+                    </div>
+                </div>`;
+        }
+    }
+
+    // Strip top relative Markdown links inside files as the app has native sidebar navigation
+    function stripLocalMarkdownNavigation(markdown) {
+        // Match standard: [🏠 Home](index.md) | [🚀 Getting Started]...
+        return markdown.replace(/\[🏠 Home\][\s\S]*?\n\n---\n/, "");
+    }
+
+    // Compile Blockquote Github style alerts > [!NOTE] to gorgeous glass divs
+    function parseGitHubAlerts(html) {
+        const regex = /<blockquote>\s*<p>\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*<br\s*\/?>?\s*([\s\S]*?)<\/p>\s*<\/blockquote>/gi;
+        return html.replace(regex, (match, type, content) => {
+            const uType = type.toUpperCase();
+            const icon = alertIcons[uType] || alertIcons.NOTE;
+            return `
+            <div class="custom-alert alert-${uType.toLowerCase()}">
+                <div class="alert-icon-box">${icon}</div>
+                <div class="alert-content-box">
+                    <strong>${uType}</strong>
+                    <p>${content.trim()}</p>
+                </div>
+            </div>`;
+        });
+    }
+
+    // Format pre elements as terminal windows, add Copy actions
+    function formatCodeBlocks() {
+        const preElements = document.querySelectorAll("#rendered-content pre");
+        preElements.forEach(pre => {
+            pre.classList.add("terminal-block");
+            
+            // Create copy button
+            const btn = document.createElement("button");
+            btn.className = "copy-btn";
+            btn.innerText = "Copy";
+            
+            // Get raw code content to copy
+            const code = pre.querySelector("code");
+            if (code) {
+                btn.addEventListener("click", () => {
+                    navigator.clipboard.writeText(code.innerText).then(() => {
+                        btn.innerText = "Copied!";
+                        btn.classList.add("copied");
+                        setTimeout(() => {
+                            btn.innerText = "Copy";
+                            btn.classList.remove("copied");
+                        }, 2000);
+                    });
+                });
+            }
+            pre.appendChild(btn);
+        });
+    }
+
+    // Dynamic Footer navigation anchors
+    function updateFooterNav(currentPageId) {
+        const index = pagesList.findIndex(p => p.id === currentPageId);
+        const prevBtn = document.getElementById("footer-prev-btn");
+        const nextBtn = document.getElementById("footer-next-btn");
+
+        if (index > 0) {
+            const prevPage = pagesList[index - 1];
+            prevBtn.href = `#${prevPage.id}`;
+            document.getElementById("footer-prev-title").innerText = prevPage.title;
+            prevBtn.style.visibility = "visible";
+        } else {
+            prevBtn.style.visibility = "hidden";
+        }
+
+        if (index < pagesList.length - 1) {
+            const nextPage = pagesList[index + 1];
+            nextBtn.href = `#${nextPage.id}`;
+            document.getElementById("footer-next-title").innerText = nextPage.title;
+            nextBtn.style.visibility = "visible";
+        } else {
+            nextBtn.style.visibility = "hidden";
+        }
+    }
+
+    // Intercept clicks on standard markdown relative links, route dynamically instead
+    document.getElementById("rendered-content").addEventListener("click", (e) => {
+        const link = e.target.closest("a");
+        if (link) {
+            const href = link.getAttribute("href");
+            if (href && href.endsWith(".md") && !href.startsWith("http")) {
+                e.preventDefault();
+                const cleanHash = href.replace(".md", "");
+                window.location.hash = cleanHash;
+            }
+        }
+    });
+
+    // Hash Router Listener
+    window.addEventListener("hashchange", () => {
+        const rawHash = window.location.hash.substring(1) || "index";
+        loadPage(rawHash);
+    });
+
+    // Initial load Router
+    document.addEventListener("DOMContentLoaded", () => {
+        const initialHash = window.location.hash.substring(1) || "index";
+        loadPage(initialHash);
+        initializeTheme();
+        buildSearchIndex();
+        lucide.createIcons();
+    });
+
+    // ==========================================
+    // ☀️ THEME CONTROLLER (LIGHT/DARK)
+    // ==========================================
+
+    const themeToggleBtn = document.getElementById("theme-toggle");
+    const sunIcon = themeToggleBtn.querySelector(".sun-icon");
+    const moonIcon = themeToggleBtn.querySelector(".moon-icon");
+
+    function initializeTheme() {
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        if (savedTheme === "light") {
+            document.body.classList.remove("dark-theme");
+            document.body.classList.add("light-theme");
+            sunIcon.style.display = "none";
+            moonIcon.style.display = "block";
+        } else {
+            document.body.classList.remove("light-theme");
+            document.body.classList.add("dark-theme");
+            sunIcon.style.display = "block";
+            moonIcon.style.display = "none";
+        }
+    }
+
+    themeToggleBtn.addEventListener("click", () => {
+        if (document.body.classList.contains("dark-theme")) {
+            document.body.classList.remove("dark-theme");
+            document.body.classList.add("light-theme");
+            localStorage.setItem("theme", "light");
+            sunIcon.style.display = "none";
+            moonIcon.style.display = "block";
+        } else {
+            document.body.classList.remove("light-theme");
+            document.body.classList.add("dark-theme");
+            localStorage.setItem("theme", "dark");
+            sunIcon.style.display = "block";
+            moonIcon.style.display = "none";
+        }
+    });
+
+    // ==========================================
+    // 🔍 FULL-TEXT CLIENT-SIDE SEARCH ENGINE
+    // ==========================================
+
+    async function buildSearchIndex() {
+        for (const page of pagesList) {
+            try {
+                const response = await fetch(page.file);
+                if (!response.ok) continue;
+                const text = await response.text();
+                
+                // Parse markdown lines to index headings and paragraphs
+                const lines = text.split("\n");
+                let currentHeading = page.title;
+                
+                lines.forEach(line => {
+                    const trimmed = line.trim();
+                    if (!trimmed) return;
+                    
+                    // Match heading levels
+                    if (trimmed.startsWith("#")) {
+                        currentHeading = trimmed.replace(/^#+\s+/, "");
+                    } else if (trimmed.length > 10 && !trimmed.startsWith("!")) {
+                        fullTextIndex.push({
+                            pageId: page.id,
+                            pageTitle: page.title,
+                            heading: currentHeading,
+                            content: trimmed
+                        });
+                    }
+                });
+            } catch (err) {
+                console.warn(`Could not index ${page.file} for search.`);
+            }
+        }
+    }
+
+    const searchBox = document.getElementById("search-box");
+    const resultsContainer = document.getElementById("search-results-container");
+    const resultsList = document.getElementById("search-results-list");
+
+    searchBox.addEventListener("input", (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        if (!query) {
+            resultsContainer.style.display = "none";
+            return;
+        }
+
+        // Filter index for matches
+        const matches = fullTextIndex.filter(item => 
+            item.content.toLowerCase().includes(query) || 
+            item.heading.toLowerCase().includes(query) ||
+            item.pageTitle.toLowerCase().includes(query)
+        ).slice(0, 8); // Limit to 8 responsive entries
+
+        if (matches.length === 0) {
+            resultsList.innerHTML = `
+                <li style="padding: 16px; color: var(--text-muted); font-size: 0.85rem; text-align: center;">
+                    No results found for "${e.target.value}"
+                </li>`;
+            resultsContainer.style.display = "block";
+            return;
+        }
+
+        resultsList.innerHTML = matches.map(item => {
+            // Extract a clean visual snippet highlighting match
+            const contentIndex = item.content.toLowerCase().indexOf(query);
+            let snippet = item.content;
+            if (contentIndex > -1) {
+                const start = Math.max(0, contentIndex - 30);
+                const end = Math.min(item.content.length, contentIndex + query.length + 50);
+                snippet = (start > 0 ? "..." : "") + item.content.substring(start, end) + (end < item.content.length ? "..." : "");
+            }
+            
+            // Highlight matching tokens
+            const regex = new RegExp(`(${query})`, "gi");
+            const hlSnippet = snippet.replace(regex, '<span class="search-highlight">$1</span>');
+            const hlHeading = item.heading.replace(regex, '<span class="search-highlight">$1</span>');
+
+            return `
+            <li class="search-result-item">
+                <a href="#${item.pageId}">
+                    <span class="result-title">${hlHeading}</span>
+                    <span class="result-subtitle">${item.pageTitle}</span>
+                    <span class="result-snippet">${hlSnippet}</span>
+                </a>
+            </li>`;
+        }).join("");
+
+        resultsContainer.style.display = "block";
+    });
+
+    // Close search dropdown on click outside
+    document.addEventListener("click", (e) => {
+        if (!e.target.closest(".search-wrapper")) {
+            resultsContainer.style.display = "none";
+        }
+    });
+
+    // Keyboard shortcut / focus search
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "/" && document.activeElement !== searchBox) {
+            e.preventDefault();
+            searchBox.focus();
+        }
+    });
+
+    // ==========================================
+    // 📱 RESPONSIVE SIDEBAR MOBILE TOGGLE
+    // ==========================================
+    const sidebarToggle = document.getElementById("sidebar-toggle");
+    const sidebar = document.getElementById("app-sidebar");
+
+    sidebarToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        sidebar.classList.toggle("open");
+    });
+
+    document.addEventListener("click", (e) => {
+        if (sidebar.classList.contains("open") && !e.target.closest("#app-sidebar") && e.target !== sidebarToggle) {
+            sidebar.classList.remove("open");
+        }
+    });
+</script>
+</body>
+</html>
