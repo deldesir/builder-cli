@@ -8,7 +8,7 @@ import { BaseQueue } from "./BaseQueue";
 type PushHandler = {
     builder: (dir: string) => Promise<any>;
     buildUpdateMap: (builtData: any) => Record<string, unknown>;
-    update: (name: string, updateMap: Record<string, unknown>, mtime: string) => Promise<void>;
+    update: (name: string, updateMap: Record<string, unknown>, mtime?: string) => Promise<void>;
     getNameKey: (builtData: any) => string;
     nameFieldPath: string;
 };
@@ -49,12 +49,16 @@ export class PushQueue extends BaseQueue {
         },
     };
 
+    private force: boolean;
+
     constructor(
         client: FrappeClient,
         type: "Page" | "Component" | "Global",
         debounceDelay: number = 1000,
+        force: boolean = false,
     ) {
         super(client, type, debounceDelay);
+        this.force = force;
     }
 
     add(mainDir: string, fileDir: string) {
@@ -106,20 +110,27 @@ export class PushQueue extends BaseQueue {
         try {
             const fileMtime = getFileStats(fileDir)?.mtime.getTime() || 0;
             const storedMtime = readFile(`${mainDir}/.last_modified`);
-            if (!storedMtime) {
-                logger.info(
-                    `No .last_modified file found for ${mainDir}. Skipping update.`,
-                );
-                return;
-            }
 
-            const serverMtime = new Date(storedMtime.trim()).getTime();
+            // The `.last_modified` mtime check is an optimization for the
+            // interactive watch/edit workflow. Deterministic git-seeded deploys
+            // (e.g. a fresh clone that has no `.last_modified` files) must push
+            // unconditionally, so `--force` bypasses both guards below.
+            if (!this.force) {
+                if (!storedMtime) {
+                    logger.info(
+                        `No .last_modified file found for ${mainDir}. Skipping update.`,
+                    );
+                    return;
+                }
 
-            if (fileMtime <= serverMtime) {
-                logger.info(
-                    `No local changes detected for ${mainDir} since last sync. Skipping update to server.`,
-                );
-                return;
+                const serverMtime = new Date(storedMtime.trim()).getTime();
+
+                if (fileMtime <= serverMtime) {
+                    logger.info(
+                        `No local changes detected for ${mainDir} since last sync. Skipping update to server.`,
+                    );
+                    return;
+                }
             }
 
             const builtData = await handler.builder(mainDir);
@@ -131,7 +142,7 @@ export class PushQueue extends BaseQueue {
             }
 
             const updateMap = handler.buildUpdateMap(builtData);
-            await handler.update(name, updateMap, storedMtime);
+            await handler.update(name, updateMap, storedMtime ?? undefined);
             logger.info(`Updated ${this.type}: ${name}`);
         } catch (err) {
             logger.error(

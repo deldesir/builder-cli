@@ -5,6 +5,7 @@ import { initCommand } from "./commands/init";
 import { watchCommand } from "./commands/watch";
 import { pullCommand } from "./commands/pull";
 import { pushCommand } from "./commands/push";
+import { publishCommand } from "./commands/publish";
 
 const program = new Command();
 
@@ -17,6 +18,7 @@ program.addCommand(initCommand);
 program.addCommand(watchCommand);
 program.addCommand(pullCommand);
 program.addCommand(pushCommand);
+program.addCommand(publishCommand);
 
 if (!process.argv.slice(2).length) {
   program.outputHelp();

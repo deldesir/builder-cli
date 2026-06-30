@@ -124,6 +124,39 @@ class FrappeClient {
         }
     }
 
+    async publishPage(pageName: string): Promise<string | null> {
+        // Invokes the whitelisted `publish()` method on the Builder Page doctype,
+        // which promotes `draft_blocks` -> live `blocks`, sets `published = 1`,
+        // and queues preview generation. Returns the page route on success.
+        try {
+            const url = `${this.siteUrl}/api/method/run_doc_method`;
+            const response = await fetch(encodeURI(url), {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `token ${this.authToken}`,
+                },
+                body: JSON.stringify({
+                    dt: "Builder Page",
+                    dn: pageName,
+                    method: "publish",
+                }),
+            });
+            if (!response.ok) {
+                const errBody = await response.text();
+                logger.error(
+                    `${response.status} ${response.statusText || "Unknown error occurred while publishing page"}: ${errBody}`,
+                );
+                return null;
+            }
+            // run_doc_method wraps the method's return value in `message`.
+            return (await response.json()).message ?? "";
+        } catch (error) {
+            logger.error("Error occurred while publishing page:", error);
+            return null;
+        }
+    }
+
     async getComponents(): Promise<any> {
         try {
             const response = await fetch(
