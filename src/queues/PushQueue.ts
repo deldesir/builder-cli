@@ -42,6 +42,7 @@ export class PushQueue extends BaseQueue {
             builder: buildComponent,
             buildUpdateMap: (data) => ({
                 block: JSON.stringify(data.block),
+                component_name: data.componentData.component_name,
             }),
             update: (name, updateMap, mtime) => this.client.updateComponent(name, updateMap, mtime),
             getNameKey: (data) => data.componentData.name,
