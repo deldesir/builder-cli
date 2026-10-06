@@ -239,6 +239,13 @@ class FrappeClient {
                 body: JSON.stringify(body),
             });
             
+            if (response.status === 404) {
+                // The site has never seen this component (a fresh site, or a component the
+                // repo added since the last push): create it instead of leaving the pages
+                // that use it with an empty block.
+                return this.createComponent(componentName, updateMap);
+            }
+
             if (!response.ok) {
                 const errBody = await response.text();
                 logger.error(
@@ -249,6 +256,44 @@ class FrappeClient {
             return (await response.json()).data;
         } catch (error) {
             logger.error("Error occurred while updating component:", error);
+            return null;
+        }
+    }
+
+    async createComponent(
+        componentName: string,
+        updateMap: Record<string, unknown>,
+    ): Promise<any> {
+        try {
+            const url = `${this.siteUrl}/api/resource/Builder Component`;
+            const body = {
+                ...updateMap,
+                name: componentName,
+                component_id: componentName,
+                component_name: updateMap.component_name || componentName,
+                source: "cli",
+            };
+
+            const response = await fetch(encodeURI(url), {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `token ${this.authToken}`,
+                },
+                body: JSON.stringify(body),
+            });
+
+            if (!response.ok) {
+                const errBody = await response.text();
+                logger.error(
+                    `${response.status} ${response.statusText || "Unknown error occurred while creating component"}: ${errBody}`
+                );
+                return null;
+            }
+            logger.info(`Created Component: ${componentName}`);
+            return (await response.json()).data;
+        } catch (error) {
+            logger.error("Error occurred while creating component:", error);
             return null;
         }
     }
